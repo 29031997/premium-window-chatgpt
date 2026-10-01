@@ -9,6 +9,7 @@ import { WINDOW_TYPES } from "@/data/window-types";
 import { PROFILES } from "@/data/profiles";
 import { GLAZING } from "@/data/glazing";
 import { COLORS } from "@/data/colors";
+import { OPENING_PRESETS } from "@/data/opening-presets";
 import { HANDLES, OUTER_FRAMES } from "@/data/hardware";
 import { LIMITS } from "@/lib/configurator/validation";
 import type { OpeningMode, PaneFinish } from "@/types/configurator";
@@ -79,6 +80,7 @@ export function ConfiguratorControls() {
   const setWindowType = useWindowConfiguratorStore((state) => state.setWindowType);
   const setValue = useWindowConfiguratorStore((state) => state.setValue);
   const setSectionOpening = useWindowConfiguratorStore((state) => state.setSectionOpening);
+  const applyOpeningPreset = useWindowConfiguratorStore((state) => state.applyOpeningPreset);
   const setSectionFinish = useWindowConfiguratorStore((state) => state.setSectionFinish);
   const toggleExtension = useWindowConfiguratorStore((state) => state.toggleExtension);
 
@@ -128,6 +130,20 @@ export function ConfiguratorControls() {
         <AccordionItem value="opening">
           <AccordionTrigger>Открывание</AccordionTrigger>
           <AccordionContent>
+            <div className="mb-5">
+              <Label help="Готовые схемы взяты из исходного набора конфигуратора. Выбор сразу применяет открывания ко всем основным створкам.">Готовые схемы</Label>
+              <div className="grid grid-cols-2 gap-2.5">
+                {OPENING_PRESETS.filter((preset) => preset.columns === configuration.sections.length).map((preset) => (
+                  <OptionCard
+                    key={preset.id}
+                    title={preset.name}
+                    image={preset.image}
+                    selected={preset.openings.every((opening, index) => configuration.sections[index]?.opening === opening)}
+                    onClick={() => applyOpeningPreset(preset.openings)}
+                  />
+                ))}
+              </div>
+            </div>
             <div className="space-y-3">
               {configuration.sections.map((section, index) => (
                 <div key={section.id}>
@@ -171,19 +187,21 @@ export function ConfiguratorControls() {
                 <Label help={key === "interiorColorId" ? "Цвет окна со стороны интерьера." : "Цвет окна со стороны улицы."}>
                   {key === "interiorColorId" ? "Внутри" : "Снаружи"}
                 </Label>
-                <div className="grid grid-cols-5 gap-2">
+                <div className="grid grid-cols-4 gap-2 sm:grid-cols-6 lg:grid-cols-4 xl:grid-cols-6">
                   {COLORS.map((color) => (
                     <button
                       key={color.id}
                       type="button"
                       onClick={() => setValue(key, color.id)}
-                      className="group text-center"
+                      className="group min-w-0 text-center"
                       title={color.name}
                     >
                       <span
-                        className={`mx-auto block size-9 rounded-full border border-black/10 shadow-sm transition group-hover:scale-105 ${configuration[key] === color.id ? "ring-2 ring-stone-950 ring-offset-2" : ""}`}
+                        className={`relative mx-auto block size-10 overflow-hidden rounded-xl border border-black/10 shadow-sm transition group-hover:scale-105 ${configuration[key] === color.id ? "ring-2 ring-stone-950 ring-offset-2" : ""}`}
                         style={{ backgroundColor: color.hex }}
-                      />
+                      >
+                        {color.image ? <img src={color.image} alt="" className="size-full object-cover" /> : null}
+                      </span>
                       <span className="mt-1.5 block truncate text-[9px] text-stone-500">{color.name}</span>
                     </button>
                   ))}
