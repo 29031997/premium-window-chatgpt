@@ -16,7 +16,7 @@ export function HeroStory() {
           className="absolute inset-0 scale-100 bg-cover bg-center"
           style={{
             backgroundImage:
-              "linear-gradient(90deg,rgba(12,16,13,.52),rgba(12,16,13,.06) 62%,rgba(12,16,13,.20)),url('/assets/generated/story/hero-architecture.webp')",
+              "linear-gradient(90deg,rgba(12,16,13,.52),rgba(12,16,13,.06) 62%,rgba(12,16,13,.20)),url('/assets/generated/hero-architecture.webp')",
           }}
         />
       </div>
@@ -28,7 +28,7 @@ export function HeroStory() {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "linear-gradient(90deg,rgba(24,29,25,.76),rgba(24,29,25,.10)),url('/assets/generated/story/profile-macro.webp')",
+              "linear-gradient(90deg,rgba(24,29,25,.76),rgba(24,29,25,.10)),url('/assets/profiles/natura-solid-96.jpg')",
           }}
         />
       </div>
@@ -38,7 +38,7 @@ export function HeroStory() {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "linear-gradient(90deg,rgba(17,20,18,.72),rgba(17,20,18,.13)),url('/assets/generated/story/manufacturing.webp')",
+              "linear-gradient(90deg,rgba(17,20,18,.72),rgba(17,20,18,.13)),url('/assets/generated/hero-architecture.webp')",
           }}
         />
       </div>
