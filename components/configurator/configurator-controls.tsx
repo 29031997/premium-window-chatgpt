@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Switch } from "@/components/ui/switch";
 import { OptionCard } from "@/components/configurator/option-card";
@@ -200,7 +202,7 @@ export function ConfiguratorControls() {
                         className={`relative mx-auto block size-10 overflow-hidden rounded-xl border border-black/10 shadow-sm transition group-hover:scale-105 ${configuration[key] === color.id ? "ring-2 ring-stone-950 ring-offset-2" : ""}`}
                         style={{ backgroundColor: color.hex }}
                       >
-                        {color.image ? <img src={color.image} alt="" className="size-full object-cover" /> : null}
+                        {color.image ? <Image src={color.image} alt="" fill sizes="40px" className="object-cover" /> : null}
                       </span>
                       <span className="mt-1.5 block truncate text-[9px] text-stone-500">{color.name}</span>
                     </button>
