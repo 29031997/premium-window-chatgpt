@@ -1,8 +1,8 @@
 const projects = [
-  { id: "01", title: "Pine Ridge House", place: "Алматы · Медеу", meta: "92 м² остекления · алюминий", image: "/assets/generated/projects/project-01.webp", span: "lg:col-span-7" },
-  { id: "02", title: "Stone Courtyard", place: "Астана · Greenline", meta: "Панорамные порталы · 3,2 м", image: "/assets/generated/projects/project-02.webp", span: "lg:col-span-5" },
-  { id: "03", title: "Lake Residence", place: "Бурабай", meta: "Тёплый алюминий · 68 м²", image: "/assets/generated/projects/project-03.webp", span: "lg:col-span-5" },
-  { id: "04", title: "Quiet Villa", place: "Алматы · предгорья", meta: "Дерево + алюминий", image: "/assets/generated/projects/project-04.webp", span: "lg:col-span-7" },
+  { id: "01", title: "Pine Ridge House", place: "Алматы · Медеу", meta: "92 м² остекления · алюминий", image: "/assets/generated/hero-architecture.webp", span: "lg:col-span-7" },
+  { id: "02", title: "Stone Courtyard", place: "Астана · Greenline", meta: "Панорамные порталы · 3,2 м", image: "/assets/generated/hero-architecture.webp", span: "lg:col-span-5" },
+  { id: "03", title: "Lake Residence", place: "Бурабай", meta: "Тёплый алюминий · 68 м²", image: "/assets/generated/hero-architecture.webp", span: "lg:col-span-5" },
+  { id: "04", title: "Quiet Villa", place: "Алматы · предгорья", meta: "Дерево + алюминий", image: "/assets/generated/hero-architecture.webp", span: "lg:col-span-7" },
 ];
 
 export function ProjectsSection() {
