@@ -4,7 +4,6 @@ export const OUTER_FRAMES: CatalogOption[] = ["A", "B", "C", "D"].map((type, ind
   id: `frame-${type.toLowerCase()}`,
   name: `Тип ${type}`,
   description: "Вариант внешней рамы и монтажного узла.",
-  image: `/assets/configurator/frames/type-${type.toLowerCase()}.webp`,
   priceDelta: index * 55,
 }));
 
