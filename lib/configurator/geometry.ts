@@ -1,4 +1,5 @@
 import { COLORS } from "@/data/colors";
+import { WINDOW_TYPES } from "@/data/window-types";
 import type { WindowConfiguration } from "@/types/configurator";
 import type { SvgHandle, SvgLine, SvgRect, SvgSectionGeometry, WindowGeometry } from "@/types/geometry";
 
@@ -43,6 +44,12 @@ export function calculateWindowGeometry(configuration: WindowConfiguration): Win
   const innerY = y + FRAME;
   const innerWidth = Math.max(40, outerWidth - FRAME * 2);
   const innerHeight = Math.max(40, outerHeight - FRAME * 2);
+  const windowType = WINDOW_TYPES.find((item) => item.id === configuration.windowTypeId);
+  const hasTransom = Boolean(windowType?.transom);
+  const transomHeight = hasTransom ? Math.max(54, innerHeight * 0.23) : 0;
+  const transomGap = hasTransom ? 7 : 0;
+  const mainHeight = Math.max(40, innerHeight - transomHeight - transomGap);
+  const mainY = windowType?.transom === "top" ? innerY + transomHeight + transomGap : innerY;
 
   const outer: SvgRect = { id: "outer", x, y, width: outerWidth, height: outerHeight, kind: "frame" };
   const glass: SvgRect[] = [];
@@ -61,9 +68,9 @@ export function calculateWindowGeometry(configuration: WindowConfiguration): Win
     const rect: SvgRect = {
       id: `glass-${section.id}`,
       x: sx,
-      y: innerY,
+      y: mainY,
       width: sw,
-      height: innerHeight,
+      height: mainHeight,
       kind: section.finish === "infill" ? "infill" : "glass",
     };
 
@@ -91,6 +98,22 @@ export function calculateWindowGeometry(configuration: WindowConfiguration): Win
     cursor += sectionWidth;
   });
 
+  if (hasTransom && windowType?.transom) {
+    const parts = Math.max(1, windowType.transomParts ?? 1);
+    const transomY = windowType.transom === "top" ? innerY : mainY + mainHeight + transomGap;
+    const partWidth = innerWidth / parts;
+    for (let index = 0; index < parts; index += 1) {
+      glass.push({
+        id: `transom-${index + 1}`,
+        x: innerX + index * partWidth + 3.5,
+        y: transomY,
+        width: Math.max(20, partWidth - 7),
+        height: transomHeight,
+        kind: "glass",
+      });
+    }
+  }
+
   const extensions: SvgRect[] = [];
   if (configuration.extensions.top) extensions.push({ id: "ext-top", x, y: y - EXTENSION, width: outerWidth, height: EXTENSION, kind: "extension" });
   if (configuration.extensions.bottom) extensions.push({ id: "ext-bottom", x, y: y + outerHeight, width: outerWidth, height: EXTENSION, kind: "extension" });
@@ -110,5 +133,5 @@ export function calculateWindowGeometry(configuration: WindowConfiguration): Win
 }
 
 export function windowFrameColor(configuration: WindowConfiguration) {
-  return COLORS.find((color) => color.id === configuration.exteriorColorId)?.hex ?? "#3C403E";
+  return COLORS.find((color) => color.id === configuration.exteriorColorId)?.hex ?? "#383E42";
 }
