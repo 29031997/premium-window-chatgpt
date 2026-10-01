@@ -1,5 +1,6 @@
 export type OpeningMode = "fixed" | "tilt-turn-left" | "tilt-turn-right" | "tilt" | "turn-left" | "turn-right";
 export type PaneFinish = "clear" | "frosted" | "infill";
+export type TransomPosition = "top" | "bottom";
 
 export interface WindowSection {
   id: string;
@@ -40,8 +41,24 @@ export interface CatalogOption {
 
 export interface WindowTypeOption extends CatalogOption {
   columns: number;
-  topLight?: boolean;
-  bottomLight?: boolean;
+  transom?: TransomPosition;
+  transomParts?: number;
+}
+
+export interface ColorOption {
+  id: string;
+  name: string;
+  hex: string;
+  image?: string;
+  priceDelta: number;
+}
+
+export interface OpeningPreset {
+  id: string;
+  name: string;
+  image: string;
+  columns: number;
+  openings: OpeningMode[];
 }
 
 export interface PriceLine {
