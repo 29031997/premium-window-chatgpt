@@ -13,6 +13,7 @@ interface ConfiguratorStore {
   setValue: <K extends keyof WindowConfiguration>(key: K, value: WindowConfiguration[K]) => void;
   setSectionWidth: (id: string, value: number) => void;
   setSectionOpening: (id: string, value: OpeningMode) => void;
+  applyOpeningPreset: (values: OpeningMode[]) => void;
   setSectionFinish: (id: string, value: PaneFinish) => void;
   toggleExtension: (side: keyof WindowConfiguration["extensions"]) => void;
   reset: () => void;
@@ -85,6 +86,17 @@ export const useWindowConfiguratorStore = create<ConfiguratorStore>((set) => ({
         sections: state.configuration.sections.map((section) =>
           section.id === id ? { ...section, opening: value } : section,
         ),
+      },
+    })),
+
+  applyOpeningPreset: (values) =>
+    set((state) => ({
+      configuration: {
+        ...state.configuration,
+        sections: state.configuration.sections.map((section, index) => ({
+          ...section,
+          opening: values[index] ?? section.opening,
+        })),
       },
     })),
 
