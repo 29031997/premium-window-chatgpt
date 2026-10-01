@@ -15,12 +15,12 @@ export function WindowConfigurator() {
           </p>
         </div>
 
-        <div className="overflow-hidden rounded-[30px] border border-black/8 bg-white shadow-[0_30px_90px_rgba(42,36,30,.08)] lg:grid lg:h-[min(850px,calc(100vh-96px))] lg:min-h-[700px] lg:grid-cols-[minmax(310px,28%)_1fr]">
-          <div className="max-h-[760px] border-b border-black/8 bg-[#faf9f6] lg:max-h-none lg:border-b-0 lg:border-r">
-            <ConfiguratorControls />
-          </div>
-          <div className="lg:min-h-0">
+        <div className="flex flex-col overflow-hidden rounded-[30px] border border-black/8 bg-white shadow-[0_30px_90px_rgba(42,36,30,.08)] lg:grid lg:h-[min(850px,calc(100vh-96px))] lg:min-h-[700px] lg:grid-cols-[minmax(310px,28%)_1fr]">
+          <div className="order-1 lg:order-2 lg:min-h-0">
             <ConfiguratorPreview />
+          </div>
+          <div className="order-2 max-h-[760px] border-t border-black/8 bg-[#faf9f6] lg:order-1 lg:max-h-none lg:border-r lg:border-t-0">
+            <ConfiguratorControls />
           </div>
         </div>
       </div>
