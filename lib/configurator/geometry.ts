@@ -1,6 +1,6 @@
 import { COLORS } from "@/data/colors";
 import type { WindowConfiguration } from "@/types/configurator";
-import type { SvgHandle, SvgLine, SvgRect, WindowGeometry } from "@/types/geometry";
+import type { SvgHandle, SvgLine, SvgRect, SvgSectionGeometry, WindowGeometry } from "@/types/geometry";
 
 const MARGIN = 74;
 const FRAME = 28;
@@ -49,7 +49,7 @@ export function calculateWindowGeometry(configuration: WindowConfiguration): Win
   const openings: SvgLine[] = [];
   const glazingBars: SvgLine[] = [];
   const handles: SvgHandle[] = [];
-  const sections = [];
+  const sections: SvgSectionGeometry[] = [];
 
   let cursor = innerX;
   configuration.sections.forEach((section) => {
